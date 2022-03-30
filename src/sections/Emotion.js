@@ -1,6 +1,7 @@
 import { useState } from "react";
+import styled from "@emotion/styled";
+import { keyframes, jsx, css } from "@emotion/react";
 import { Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
 
 const Container = styled.div`
   display: flex;
@@ -30,7 +31,7 @@ const Circle = styled(Box)`
 
 const Btn = styled.button`
   padding: 10px 20px;
-  background-color: ${({ $bgColor }) => $bgColor};
+  background-color: ${({ bg }) => bg};
   color: #fff;
   display: flex;
   align-items: center;
@@ -39,10 +40,23 @@ const Btn = styled.button`
   cursor: pointer;
 `;
 
-const TextInput = styled.input.attrs({ required: true, type: "text" })`
+const pinkInput = css`
+  background-color: pink;
+`;
+const RedPasswordInput = (props) => (
+  <input
+    type="password"
+    css={css`
+      background-color: red;
+      display: block;
+    `}
+    {...props}
+  />
+);
+
+const TextInput = styled.input`
   background-color: #fff;
   border: 1px solid #ddd;
-  font-size: 1rem;
   padding: 10px;
   box-sizing: border-box;
 `;
@@ -52,6 +66,8 @@ const Main = () => {
   return (
     <>
       <Container>
+        <RedPasswordInput css={pinkInput} />
+        <TextInput required type="password" />
         <Box bgColor="black" />
         <Circle bgColor="tomato" />
         <Box bgColor="green" />
@@ -59,17 +75,15 @@ const Main = () => {
       </Container>
 
       <Container>
-        <Btn onClick={() => setX(!x)} $bgColor={x ? "red" : "black"}>
+        <Btn onClick={() => setX(!x)} bg={x ? "red" : "black"}>
           login
         </Btn>
-        <Btn to="/" as={Link} $bgColor="red">
+        <Btn to="/" as={Link} bg="blue">
           Home
         </Btn>
       </Container>
 
-      <Container as="form">
-        <TextInput />
-      </Container>
+      <Container as="form"></Container>
     </>
   );
 };

@@ -5,6 +5,7 @@ import GlobalStyle from "./GlobalStyles";
 
 import Home from "./sections/Home";
 import StyledComponents from "./sections/StyledComponents";
+import Emotion from "./sections/Emotion";
 
 const Header = styled.header`
   width: 100%;
@@ -18,6 +19,10 @@ const Nav = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  > li {
+    margin-left: 1rem;
+  }
 `;
 
 function App() {
@@ -33,12 +38,16 @@ function App() {
             <li>
               <Link to="/styledComponents">S1_styledComponents</Link>
             </li>
+            <li>
+              <Link to="/emotion">S2_emotion</Link>
+            </li>
           </Nav>
         </Header>
 
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/styledComponents" element={<StyledComponents />} />
+          <Route path="/emotion" element={<Emotion />} />
         </Routes>
       </div>
     </>
