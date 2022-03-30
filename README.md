@@ -1,6 +1,6 @@
 # Nomad React master 2021
 
-## styled components
+## styled components & Emotion
 
 ## TS
 
