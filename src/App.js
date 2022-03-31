@@ -6,6 +6,7 @@ import GlobalStyle from "./GlobalStyles";
 import Home from "./sections/Home";
 import StyledComponents from "./sections/StyledComponents";
 import Emotion from "./sections/Emotion";
+import TypeScript from './sections/TypeScript';
 
 const Header = styled.header`
   width: 100%;
@@ -41,6 +42,9 @@ function App() {
             <li>
               <Link to="/emotion">S2_emotion</Link>
             </li>
+            <li>
+              <Link to="/ts">S3_TypeScript</Link>
+            </li>
           </Nav>
         </Header>
 
@@ -48,6 +52,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/styledComponents" element={<StyledComponents />} />
           <Route path="/emotion" element={<Emotion />} />
+          <Route path="/ts" element={<TypeScript />} />
         </Routes>
       </div>
     </>
