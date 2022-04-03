@@ -1,5 +1,5 @@
 import { Routes, Route, Link } from "react-router-dom";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import GlobalStyle from "./GlobalStyles";
 
@@ -13,6 +13,7 @@ const Header = styled.header`
   width: 100%;
   padding: 1rem 0;
   display: flex;
+  background-color: ${({ theme }) => theme.backgroundColor};
   justify-content: space-between;
   align-items: center;
 `;
@@ -24,6 +25,9 @@ const Nav = styled.ul`
 
   > li {
     margin-left: 1rem;
+    > a {
+      color: ${({ theme }) => theme.textColor};
+    }
   }
 `;
 
