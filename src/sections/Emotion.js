@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
-import {keyframes} from '@emotion/react';
+import { keyframes } from "@emotion/react";
 
 const Container = styled.div`
   display: flex;
@@ -68,9 +68,7 @@ const Emotion = () => {
         </Btn>
       </Container>
 
-      <Container as="form">
-        {/* <TextInput /> */}
-      </Container>
+      <Container as="form">{/* <TextInput /> */}</Container>
     </>
   );
 };
