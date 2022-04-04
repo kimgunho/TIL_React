@@ -19,11 +19,11 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  >h1{
-    >a{
-      color:${({theme})=> theme.mainColor};
-      padding:1rem;
-      font-size:1.25rem;
+  > h1 {
+    > a {
+      color: ${({ theme }) => theme.mainColor};
+      padding: 1rem;
+      font-size: 1.25rem;
     }
   }
 `;
@@ -76,7 +76,7 @@ function App() {
           <Route path="/ts" element={<TypeScript />} />
           <Route path="/tsForm" element={<TsForm />} />
           <Route path="/coins" element={<Coins />} />
-          <Route path="/coins/:id" element={<Coin />} />
+          <Route path="/coins/:id/*" element={<Coin />} />
         </Routes>
       </div>
     </>

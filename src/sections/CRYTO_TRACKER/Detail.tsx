@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import styled from "styled-components";
+import { useLocation, useParams, Route, Routes, Link } from "react-router-dom";
+import styled from "@emotion/styled";
+import Chart from "./Chart";
+import Price from "./Price";
 
 const Title = styled.h1`
   font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
+  color: ${({ theme }) => theme.mainColor};
 `;
 
 const Loader = styled.span`
@@ -25,13 +27,19 @@ const Header = styled.header`
   align-items: center;
 `;
 
+const Text = styled.p`
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: 2;
+  color: ${({ theme }) => theme.backgroundColor};
+`;
 
 interface RouteState {
-    state : {
-        state : {
-            name : string;
-        }
-    }
+  state: {
+    state: {
+      name: string;
+    };
+  };
 }
 
 interface InfoData {
@@ -91,7 +99,7 @@ interface PriceData {
 
 function Coin() {
   const [loading, setLoading] = useState(true);
-  const { id } = useParams<{id : string}>();
+  const { id } = useParams<{ id: string }>();
   const { state } = useLocation() as RouteState;
   const [info, setInfo] = useState<InfoData>();
   const [priceInfo, setPriceInfo] = useState<PriceData>();
@@ -105,14 +113,28 @@ function Coin() {
       ).json();
       setInfo(infoData);
       setPriceInfo(priceData);
+      setLoading(false);
     })();
-  }, []);
+  }, [id]);
   return (
     <Container>
       <Header>
-        <Title>{state?.state.name || "Loading..."}</Title>
+        <Title>{id || "Loading..."}</Title>
       </Header>
-      {loading ? <Loader>Loading...</Loader> : null}
+      {loading ? (
+        <Loader>Loading...</Loader>
+      ) : (
+        <>
+          <Text>{info?.description}</Text>
+          <Link to={`/coins/${id}/chart`}>chart</Link>
+          <Link to={`/coins/${id}/price`}>price</Link>
+
+          <Routes>
+            <Route path={`chart`} element={<Chart />} />
+            <Route path={`price`} element={<Price />} />
+          </Routes>
+        </>
+      )}
     </Container>
   );
 }
