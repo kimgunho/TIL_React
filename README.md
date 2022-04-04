@@ -11,7 +11,7 @@
 ### 의문점
 
 - const wellcomeRef = useRef<HTMLHeadingElement>(null!); // !의미 알아보기
-
+test
 ## CRYPTO TRACKER
 
 ## STATE MANAGEMENT
