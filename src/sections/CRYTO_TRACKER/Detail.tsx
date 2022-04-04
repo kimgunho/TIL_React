@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams, Route, Routes, Link } from "react-router-dom";
+import {
+  useLocation,
+  useParams,
+  Route,
+  Routes,
+  Link,
+  useMatch,
+} from "react-router-dom";
 import styled from "@emotion/styled";
 import Chart from "./Chart";
 import Price from "./Price";
@@ -16,7 +23,7 @@ const Loader = styled.span`
 
 const Container = styled.div`
   padding: 0px 20px;
-  max-width: 480px;
+  max-width: 680px;
   margin: 0 auto;
 `;
 
@@ -32,6 +39,25 @@ const Text = styled.p`
   font-size: 1.25rem;
   line-height: 2;
   color: ${({ theme }) => theme.backgroundColor};
+`;
+
+const Nav = styled.ul`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > li {
+    margin: 0 1rem;
+
+    > a {
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: ${({ theme }) => theme.backgroundColor};
+      color: ${({ theme }) => theme.mainColor};
+    }
+  }
 `;
 
 interface RouteState {
@@ -103,6 +129,9 @@ function Coin() {
   const { state } = useLocation() as RouteState;
   const [info, setInfo] = useState<InfoData>();
   const [priceInfo, setPriceInfo] = useState<PriceData>();
+  const chartMatch = useMatch("/coins/:id/chart");
+  const priceMatch = useMatch("/coins/:id/price");
+
   useEffect(() => {
     (async () => {
       const infoData = await (
@@ -126,8 +155,14 @@ function Coin() {
       ) : (
         <>
           <Text>{info?.description}</Text>
-          <Link to={`/coins/${id}/chart`}>chart</Link>
-          <Link to={`/coins/${id}/price`}>price</Link>
+          <Nav>
+            <li>
+              <Link to={`/coins/${id}/chart`}>chart</Link>
+            </li>
+            <li>
+              <Link to={`/coins/${id}/price`}>price</Link>
+            </li>
+          </Nav>
 
           <Routes>
             <Route path={`chart`} element={<Chart />} />
