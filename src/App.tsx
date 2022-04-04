@@ -8,6 +8,8 @@ import StyledComponents from "./sections/StyledComponents";
 import Emotion from "./sections/Emotion";
 import TypeScript from "./sections/TypeScript";
 import TsForm from "sections/TsForm";
+import Coins from "sections/CRYTO_TRACKER";
+import Coin from "sections/CRYTO_TRACKER/Detail";
 
 const Header = styled.header`
   width: 100%;
@@ -16,6 +18,14 @@ const Header = styled.header`
   background-color: ${({ theme }) => theme.backgroundColor};
   justify-content: space-between;
   align-items: center;
+
+  >h1{
+    >a{
+      color:${({theme})=> theme.mainColor};
+      padding:1rem;
+      font-size:1.25rem;
+    }
+  }
 `;
 
 const Nav = styled.ul`
@@ -53,6 +63,9 @@ function App() {
             <li>
               <Link to="/tsForm">S4_TypeScriptForm</Link>
             </li>
+            <li>
+              <Link to="/coins">S5_CRYTO_TRACKER</Link>
+            </li>
           </Nav>
         </Header>
 
@@ -62,6 +75,8 @@ function App() {
           <Route path="/emotion" element={<Emotion />} />
           <Route path="/ts" element={<TypeScript />} />
           <Route path="/tsForm" element={<TsForm />} />
+          <Route path="/coins" element={<Coins />} />
+          <Route path="/coins/:id" element={<Coin />} />
         </Routes>
       </div>
     </>
