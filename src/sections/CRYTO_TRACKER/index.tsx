@@ -24,6 +24,14 @@ const Coin = styled.li`
     border-radius:1rem;
     cursor:pointer;
 
+    &:hover{
+        background-color:${({theme})=> theme.mainColor};
+
+        >h2{
+            color:${({theme})=> theme.backgroundColor};
+        }
+    }
+
     >h2{
         color:${({theme})=> theme.mainColor};
 
@@ -45,8 +53,6 @@ text-align:cetner;
 font-size:2rem;
 color:${({theme})=> theme.mainColor}
 `
-
-
 interface CoinItemsInterface  {
     id: string;
     name: string;
@@ -70,13 +76,20 @@ const Coins = () => {
         })();
     },[])
 
-    console.log(items)
-
     return <Container>
         <Title>title...</Title>
         {loading ? <LoadingText>loading...</LoadingText> : <CoinsList>
             {items.map((item)=> <Coin key={item.id}>
-                <h2><Link to={`/coins/${item.id}`}>{item.name} &rarr;</Link></h2>
+                <h2>
+                    <Link
+                    to={`/coins/${item.id}`} 
+                    state={{
+                    pathname : `/coins/${item.id}`,
+                    state:{name : item.name}
+                    }}>
+                    {item.name} &rarr;
+                    </Link>
+                </h2>
             </Coin>)}
         </CoinsList>}
     </Container>
